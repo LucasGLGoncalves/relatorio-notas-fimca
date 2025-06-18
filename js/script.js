@@ -15,9 +15,13 @@ function handleFile(e) {
     const json = XLSX.utils.sheet_to_json(sheet);
     globalData = prepararDados(json);
     renderDisciplinas(globalData);
-    renderTabela(globalData); // default: mostrar tudo
+    renderTabela(globalData);
+
     document.getElementById('verTodasBtn').classList.remove('hidden');
     document.getElementById('exportarBtn').classList.remove('hidden');
+
+    // Ativa filtro ao digitar
+    document.getElementById('filtroAluno').addEventListener('input', () => renderTabela(globalData));
   };
   reader.readAsArrayBuffer(file);
 }
@@ -30,19 +34,17 @@ function prepararDados(data) {
     const disciplina = linha["nome_disciplina"];
     const aluno = linha["nome_completo"];
     const entrega = {
-        entrega: linha["entrega"],
-        tipo: linha["tipo"],
-        nota: tratarNota(linha["nota"]),
-        fase: linha["fase"], // <- ISSO FALTAVA
+      entrega: linha["entrega"],
+      tipo: linha["tipo"],
+      nota: tratarNota(linha["nota"]),
+      fase: linha["fase"],
     };
-
 
     if (!disciplinaMap[disciplina]) disciplinaMap[disciplina] = {};
     if (!disciplinaMap[disciplina][aluno]) disciplinaMap[disciplina][aluno] = [];
     disciplinaMap[disciplina][aluno].push(entrega);
   });
 
-  // gerar dados para exportação
   Object.entries(disciplinaMap).forEach(([disciplina, alunos]) => {
     Object.entries(alunos).forEach(([aluno, entregas]) => {
       const total = entregas.reduce((acc, cur) => acc + cur.nota, 0);
@@ -76,9 +78,10 @@ function renderTabela(data) {
   const relatorioDiv = document.getElementById('relatorio');
   relatorioDiv.innerHTML = "";
 
+  const filtro = document.getElementById('filtroAluno')?.value?.toLowerCase() || '';
+
   Object.entries(data).forEach(([disciplina, alunos]) => {
     const section = document.createElement('div');
-
     section.innerHTML = `<h2 class="text-xl font-bold mb-4">${disciplina}</h2>`;
 
     const table = document.createElement('table');
@@ -99,6 +102,8 @@ function renderTabela(data) {
     const alunosOrdenados = Object.entries(alunos).sort(([a], [b]) => a.localeCompare(b));
 
     alunosOrdenados.forEach(([aluno, entregas]) => {
+      if (!aluno.toLowerCase().includes(filtro)) return;
+
       const notaTotal = entregas.reduce((acc, cur) => acc + cur.nota, 0);
       const situacao = notaTotal >= 7 ? 'Aprovado' : 'Reprovado';
 
@@ -124,7 +129,6 @@ function mostrarModal(aluno, disciplina, entregas) {
   const content = document.getElementById('modalContent');
   content.innerHTML = '';
 
-  // Agrupar entregas por fase
   const fases = {};
   entregas.forEach(ent => {
     const fase = normalizarFase(ent.fase);
@@ -132,7 +136,6 @@ function mostrarModal(aluno, disciplina, entregas) {
     fases[fase].push(ent);
   });
 
-  // Ordem personalizada das fases
   const ordemDesejada = ['FASE 1', 'FASE 2', 'FASE 3', 'ENTREGA FINAL', 'OUTROS'];
 
   ordemDesejada.forEach(fase => {
@@ -149,7 +152,6 @@ function mostrarModal(aluno, disciplina, entregas) {
         const tipo = document.createElement('div');
         tipo.className = "font-semibold text-sm";
         tipo.textContent = `entrega: ${ent.tipo || '(Sem tipo)'}.  |  nota: ${ent.nota}`;
-
 
         const descricao = document.createElement('div');
         descricao.className = "text-sm text-gray-700";
@@ -170,10 +172,10 @@ function normalizarFase(fase) {
 
   return fase
     .toString()
-    .replace(/[\u2000-\u206F\u00A0]/g, ' ') // remove espaços invisíveis
-    .replace(/\s+/g, ' ')                  // normaliza múltiplos espaços
+    .replace(/[\u2000-\u206F\u00A0]/g, ' ')
+    .replace(/\s+/g, ' ')
     .trim()
-    .toUpperCase();                        // padroniza para comparação
+    .toUpperCase();
 }
 
 document.getElementById('closeModal').onclick = () => {
