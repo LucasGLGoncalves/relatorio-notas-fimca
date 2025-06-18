@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Relatório de Notas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center">Relatório de Notas por Disciplina</h1>
+
+    <div class="flex flex-wrap justify-center gap-4 mb-6">
+      <label class="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-700">
+        Importar Relatório
+        <input type="file" accept=".xlsx" id="fileInput" class="hidden">
+      </label>
+
+      <button id="verTodasBtn" class="bg-green-600 text-white px-4 py-2 rounded hidden hover:bg-green-700">
+        Ver Todas as Disciplinas
+      </button>
+
+      <button id="exportarBtn" class="bg-purple-600 text-white px-4 py-2 rounded hidden hover:bg-purple-700">
+        Exportar com Total
+      </button>
+    </div>
+
+    <!-- Cards de disciplinas -->
+    <div id="disciplinas-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6"></div>
+
+    <!-- Relatório por disciplina(s) -->
+    <div id="relatorio" class="space-y-8"></div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-lg p-6 max-w-2xl w-full relative">
+      <button id="closeModal" class="absolute top-2 right-2 text-xl font-bold">✕</button>
+      <h2 class="text-xl font-bold mb-4" id="modalTitle"></h2>
+      <div id="modalContent" class="space-y-2 max-h-96 overflow-y-auto"></div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
