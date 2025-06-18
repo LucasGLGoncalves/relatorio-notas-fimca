@@ -21,7 +21,7 @@ Desenvolvido para facilitar o acompanhamento do desempenho dos alunos por profes
 ## 🧑‍🏫 Como Usar (Professores)
 
 1. **Acesse a aplicação online** (ex: via GitHub Pages):
-![Relatório de Notas por Disciplina](https://lucasglgoncalves.github.io/relatorio-notas-fimca/)
+[Relatório de Notas por Disciplina](https://lucasglgoncalves.github.io/relatorio-notas-fimca/)
 
 2. **Clique em “Importar Relatório”**  
 Envie um arquivo `.xlsx` no formato padrão exportado da FIMCA (com colunas como `nome_completo`, `nome_disciplina`, `fase`, `entrega`, `tipo`, `nota`, etc.).
