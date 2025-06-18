@@ -11,22 +11,32 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout do repositório
-        uses: actions/checkout@v3
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-      - name: Configurar GitHub Pages
-        uses: actions/configure-pages@v3
+      - name: Instalar dependências do Pages
+        uses: actions/configure-pages@v4
 
-      - name: Upload dos arquivos do site
-        uses: actions/upload-pages-artifact@v2
+      - name: Upload dos arquivos
+        uses: actions/upload-pages-artifact@v3
         with:
           path: "."
 
-      - name: Publicar no GitHub Pages
-        uses: actions/deploy-pages@v2
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
