@@ -6,6 +6,7 @@
   <title>Relatório de Notas</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body class="bg-gray-100 text-gray-800">
   <div class="container mx-auto py-8">
@@ -13,14 +14,21 @@
 
     <div class="flex flex-wrap justify-center gap-4 mb-6">
       <label class="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-700">
-        Importar Relatório
-        <input type="file" accept=".xlsx" id="fileInput" class="hidden">
+        Importar Relatório - Notas
+        <input type="file" accept=".xlsx" id="fileInputEAD" class="hidden">
       </label>
-
+      <label class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-600">
+        Importar Relatório - Porcentagem
+        <input type="file" accept=".xlsx" id="fileInputPresencial" class="hidden">
+      </label>
+    </div>
+    <div class="flex flex-wrap justify-center gap-4 mb-6">
       <button id="verTodasBtn" class="bg-green-600 text-white px-4 py-2 rounded hidden hover:bg-green-700">
         Ver Todas as Disciplinas
       </button>
-
+      <button id="exportarPdfBtn" class="bg-red-600 text-white px-4 py-2 rounded hidden hover:bg-red-700">
+        Exportar PDF
+      </button>
       <button id="exportarBtn" class="bg-purple-600 text-white px-4 py-2 rounded hidden hover:bg-purple-700">
         Exportar com Total
       </button>
