@@ -1,6 +1,6 @@
 # 📊 Relatório Interativo de Notas - FIMCA
 
-Aplicação web para leitura, visualização interativa e exportação de relatórios de notas em `.xlsx`, com agrupamento por disciplinas, fases, alunos e entregas.
+Aplicação web para leitura, visualização interativa e exportação de relatórios de notas em `.xlsx` e `pdf`, com agrupamento por disciplinas, fases, alunos e entregas.
 
 Desenvolvido para facilitar o acompanhamento do desempenho dos alunos por professores da FIMCA e outras instituições de ensino.
 
