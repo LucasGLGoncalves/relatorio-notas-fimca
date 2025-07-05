@@ -29,7 +29,7 @@ Desenvolvido para facilitar o acompanhamento do desempenho dos alunos por profes
 
 ### Etapas:
 
-1. Clique em **“Importar Relatório - Notas”** (para EAD) ou **“Importar Relatório - Porcentagem”** (para presencial/híbrido)
+1. Clique em **“Importar Relatório - Notas”** ou **“Importar Relatório - Porcentagem”**
 2. Envie um arquivo `.xlsx` no formato gerado pelo portal do professor
 
 ### Após o envio:
