@@ -9,8 +9,8 @@ Desenvolvido para facilitar o acompanhamento do desempenho dos alunos por profes
 ## 🔍 Funcionalidades
 
 ✅ Importar arquivos Excel de relatórios em dois formatos:
-- **Notas (EAD)**: notas de 0 a 10
-- **Porcentagem (Presencial/Híbrido)**: participação de 0% a 100%
+- **Notas**: notas de 0 a 10
+- **Porcentagem de participação**: participação de 0% a 100%
 
 📋 Exibir disciplinas em cards com número total de alunos  
 📊 Visualizar cada aluno com **nota final** ou **participação (%)** e situação (Aprovado/Reprovado)  
