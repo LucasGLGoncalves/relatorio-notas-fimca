@@ -57,7 +57,7 @@ Desenvolvido para facilitar o acompanhamento do desempenho dos alunos por profes
 ├── README.md
 └── .github/
 └── workflows/
-└── pages.yml
+│   └── pages.yml
 
 ```
 
